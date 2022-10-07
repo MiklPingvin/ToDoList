@@ -1,18 +1,18 @@
-import s from './App.module.css';
-import store from "./Redux/redux";
+import style from './App.module.css';
+import store from "./redux/redux";
 import {connect, Provider} from "react-redux"
 import garbage from './img/garbage.png'
 import pen from './img/pen.png'
 import plus from './img/plus.png'
-import {addTask, changeTask, deleteTask} from "./Redux/reducer";
+import {addTask, changeTask, deleteTask, editTask} from "./redux/reducer";
 
 
-const Task = ({task,deleteTask}) => {
-    return <div className={s.task}>
-        {task.text}
+const Task = ({task, deleteTask, editTask, text}) => {
+    return <div className={style.task}>
+        <div className={style.text}>{task.text}</div>
         <div>
-            <input type='image' src={garbage} className={s.button} alt="" onClick={() => deleteTask(task.id)}/>
-            <img src={pen} className={s.button} alt=""/>
+            <input type='image' src={garbage} className={style.button} alt="" onClick={() => deleteTask(task.id)}/>
+            <input type='image' src={pen} className={style.button} alt="" onClick={() => editTask(task.id, text)}/>
         </div>
     </div>
 }
@@ -25,27 +25,25 @@ function App(props) {
         props.changeTask(e.target.value)
     }
 
-    return <Provider store={store}>
-        <div className={s.app}>
-            <div className={s.input_group}>
+    return (<div className={style.app}>
+            <div className={style.input_group}>
                 ToDoList
                 <div>
-                    <input type="text" placeholder='Enter task' className={s.input} onChange={event => ChangeText(event)} value={props.state.newTaskText}/>
+                    <input type="text" placeholder='Enter task' className={style.input} onChange={event => ChangeText(event)} value={props.state.newTaskText}/>
                 </div>
-                <input type='image' src={plus} alt="" className={s.button} onClick={()=>props.addTask()}/>
+                <input type='image' src={plus} alt="" className={style.button} onClick={()=>props.addTask()}/>
             </div>
-            <div>{props.state.tasks.map(task => {
-                return <Task task={task} deleteTask={props.deleteTask}/>
+            <div>{props.state.tasks.sort((a,b)=> a.id - b.id).map(task => {
+                return <Task key={task.id} task={task} deleteTask={props.deleteTask} editTask={props.editTask} text={props.state.newTaskText}/>
             })}</div>
-        </div>
-    </Provider>
+        </div>)
 }
 
 const mapStateToProps = (state) => ({
     state: state.mainPage
 })
 
-let AppContainer = connect(mapStateToProps, {addTask,changeTask,deleteTask})(App)
+let AppContainer = connect(mapStateToProps, {addTask,changeTask,deleteTask,editTask})(App)
 const MainApp = () => {
     return <Provider store={store}>
         <AppContainer/>
