@@ -41,4 +41,5 @@
 .text {
     width: 60%;
     overflow: hidden;
+    font-size: 40px;
 }

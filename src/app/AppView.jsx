@@ -1,5 +1,5 @@
 import style from "../App.module.css";
-import plus from "../../img/plus.png";
+import plus from "../img/plus.png";
 import {Task} from "../component/Task";
 
 export const App = (props) => {
