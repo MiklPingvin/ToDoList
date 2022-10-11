@@ -12,7 +12,7 @@ export const App = (props) => {
     <div className={style.input_group}>
       ToDoList
       <div>
-        <input type="text" placeholder='Enter task' className={style.input} onChange={event => ChangeText(event)} value={props.state.newTaskText}/>
+        <input type="text" placeholder='Enter desk name' className={style.input} onChange={event => ChangeText(event)} value={props.state.newTaskText}/>
       </div>
       <input type='image' src={plus} alt="" className={style.button} onClick={() => props.addTask()}/>
     </div>
@@ -25,7 +25,10 @@ export const App = (props) => {
             task={task}
             deleteTask={props.deleteTask}
             editTask={props.editTask}
-            text={props.state.newTaskText}/>)}
+            setEditOn={props.setEditOn}/>)}
     </div>
+    <input type='image' src={plus} alt="" className={style.button} onClick={() => props.addTask()}
+        disabled={props.state.tasks.some(task=> task.EditOn)}
+    />
   </div>)
 }

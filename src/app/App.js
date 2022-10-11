@@ -1,13 +1,13 @@
 import store from "../redux/redux";
 import {connect, Provider} from "react-redux"
-import {addTask, changeTask, deleteTask, editTask} from "../redux/reducer";
+import {addTask, deleteTask, editTask, setEditOn} from "../redux/reducer";
 import {App} from "./AppView";
 
 const mapStateToProps = (state) => ({
   state: state.mainPage
 })
 
-let AppContainer = connect(mapStateToProps, {addTask, changeTask, deleteTask, editTask})(App)
+let AppContainer = connect(mapStateToProps, {addTask,setEditOn, deleteTask, editTask})(App)
 
 const MainApp = () => {
   return (
