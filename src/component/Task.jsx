@@ -5,7 +5,7 @@ import save from "../img/save.webp"
 import out from "../img/out.png"
 import {useState} from "react";
 
-export const Task = ({task, deleteTask, editTask, setEditOn}) => {
+export const Task = ({task, deleteTask, setText, setEditOn}) => {
     const [TaskText, setTaskText] = useState(task.text)
     return !task.EditOn ?
         <div className={style.task}>
@@ -21,11 +21,14 @@ export const Task = ({task, deleteTask, editTask, setEditOn}) => {
                    onChange={event => setTaskText(event.target.value)}/>
             <div>
                 <input type='image' src={out} className={style.button} alt="" onClick={() => {
-                    deleteTask(task.id)
+                    if (task.text === '') {
+                        deleteTask(task.id)
+                    }
+                    setTaskText(task.text)
                     setEditOn(task.id, false)
                 }}/>
                 <input type='image' src={save} className={style.button} alt="" onClick={() => {
-                    TaskText.trim() === '' ? deleteTask(task.id) : editTask(task.id, TaskText)
+                    TaskText.trim() === '' ? deleteTask(task.id) : setText(task.id, TaskText)
                     setEditOn(task.id, false)
                 }}/>
             </div>

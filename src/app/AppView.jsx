@@ -24,7 +24,7 @@ export const App = (props) => {
             key={task.id}
             task={task}
             deleteTask={props.deleteTask}
-            editTask={props.editTask}
+            setText={props.setText}
             setEditOn={props.setEditOn}/>)}
     </div>
     <input type='image' src={plus} alt="" className={style.button} onClick={() => props.addTask()}

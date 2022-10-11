@@ -1,5 +1,6 @@
 const ADD_TASK = 'ADD_TASK'
 const SET_EDIT_ON = 'SET_EDIT_ON'
+const SET_TEXT = 'SET_TEXT'
 const EDIT_TASK = 'EDIT_TASK'
 const DELETE_TASK = 'DELETE_TASK'
 
@@ -39,14 +40,20 @@ const reducer = (state = initialState, action) => {
                 }],
             }
         case EDIT_TASK:
+            if (action.text === '') action.text = state.tasks.find(task => task.id === action.id).text
             return {
                 ...state,
-                tasks: UpdateObjectInArray(state.tasks, action.id, "id", {text: action.text}),
+                tasks: UpdateObjectInArray(state.tasks, action.id, "id", {text: action.text,EditOn: action.EditOn}),
             }
         case SET_EDIT_ON:
             return {
                 ...state,
                 tasks: UpdateObjectInArray(state.tasks, action.id, "id", {EditOn: action.EditOn}),
+            }
+        case SET_TEXT:
+            return {
+                ...state,
+                tasks: UpdateObjectInArray(state.tasks, action.id, "id", {text: action.text}),
             }
         case DELETE_TASK:
             return {
@@ -66,14 +73,20 @@ export const deleteTask = (id) => ({
     id: id
 })
 
-export const editTask = (id, text) => ({
-    type: EDIT_TASK,
+export const setText = (id, text) => ({
+    type: SET_TEXT,
     id: id,
     text: text,
 })
 export const setEditOn = (id, EditOn) => ({
     type: SET_EDIT_ON,
     id: id,
+    EditOn: EditOn,
+})
+export const editTask = (id,text = '', EditOn = false) => ({
+    type: EDIT_TASK,
+    id: id,
+    text:text,
     EditOn: EditOn,
 })
 
