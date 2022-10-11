@@ -4,16 +4,16 @@ import {addDesk, addTask, deleteTask, editTask, setEditOn, setText} from "../red
 import {App} from "./AppView";
 
 const mapStateToProps = (state) => ({
-  state: state.mainPage
+    state: state.mainPage
 })
 
-let AppContainer = connect(mapStateToProps, {addTask,setEditOn, deleteTask, editTask,setText,addDesk})(App)
+let AppContainer = connect(mapStateToProps, {addTask, setEditOn, deleteTask, editTask, setText, addDesk})(App)
 
 const MainApp = () => {
-  return (
-    <Provider store={store}>
-    <AppContainer/>
-  </Provider>)
+    return (
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>)
 }
 
 export default MainApp;

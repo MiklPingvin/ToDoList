@@ -10,7 +10,7 @@ export const Task = ({task, deleteTask, setText, setEditOn}) => {
     return !task.EditOn ?
         <div className={style.task}>
             <div className={style.text}>{task.text}</div>
-            <div>
+            <div className={style.button_group}>
                 <input type='image' src={garbage} className={style.button} alt="" onClick={() => deleteTask(task.id)}/>
                 <input type='image' src={pen} className={style.button} alt="" onClick={() => setEditOn(task.id, true)}/>
             </div>
@@ -19,7 +19,7 @@ export const Task = ({task, deleteTask, setText, setEditOn}) => {
         <div className={style.task}>
             <input autoFocus type="text" className={style.text} value={TaskText}
                    onChange={event => setTaskText(event.target.value)}/>
-            <div>
+            <div className={style.button_group}>
                 <input type='image' src={out} className={style.button} alt="" onClick={() => {
                     if (task.text === '') {
                         deleteTask(task.id)
