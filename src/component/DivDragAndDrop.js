@@ -11,6 +11,7 @@ export const DivDragAndDrop = (props) => {
 
     function dragLeaveHandler(event) {
         event.target.style.boxShadow = 'none'
+        event.target.style.boxShadow = 'none'
     }
 
     function dragStartHandler(event, task) {
