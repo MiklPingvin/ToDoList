@@ -20,9 +20,11 @@ export const App = (props) => {
         </div>
         <div className={style.desks}>
             {props.state.desks.map(desk =>
-                <Desk name={desk.name} key={desk.id_desk} id_desk={desk.id_desk} tasks={props.state.tasks} currentTaskId={props.state.currentTaskId}
-                      addTask={props.addTask} deleteTask={props.deleteTask} setCurrentTaskId={props.setCurrentTaskId}
-                      setEditOn={props.setEditOn} setText={props.setText} setNumberOnDesk = {props.setNumberOnDesk} setDeskId={props.setDeskId}/>
+                <Desk name={desk.name} key={desk.id_desk} id_desk={desk.id_desk} tasks={props.state.tasks}
+                      currentTask={props.state.currentTask}
+                      addTask={props.addTask} deleteTask={props.deleteTask} setCurrentTask={props.setCurrentTask}
+                      setEditOn={props.setEditOn} setText={props.setText} setNumberOnDesk={props.setNumberOnDesk}
+                      setDeskId={props.setDeskId}/>
             )}
         </div>
     </div>)

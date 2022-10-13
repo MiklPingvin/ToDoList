@@ -4,7 +4,7 @@ import {
     addDesk,
     addTask,
     deleteTask,
-    setCurrentTaskId,
+    setCurrentTask,
     setDeskId,
     setEditOn,
     setNumberOnDesk,
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
     state: state.mainPage
 })
 
-let AppContainer = connect(mapStateToProps, {addTask, setEditOn, deleteTask, setText, addDesk,setNumberOnDesk,setDeskId,setCurrentTaskId})(App)
+let AppContainer = connect(mapStateToProps, {addTask, setEditOn, deleteTask, setText, addDesk,setNumberOnDesk,setDeskId,setCurrentTask})(App)
 
 const MainApp = () => {
     return (
