@@ -1,18 +1,8 @@
 const ADD_TASK = 'ADD_TASK'
 const ADD_DESK = 'ADD_DESK'
-const SET_EDIT_ON = 'SET_EDIT_ON'
-const SET_TEXT = 'SET_TEXT'
 const EDIT_TASK = 'EDIT_TASK'
 const DELETE_TASK = 'DELETE_TASK'
 
-export const UpdateObjectInArray = (items, itemID, objParam, newObjProps) => {
-    return items.map(u => {
-        if (u[objParam] === itemID) {
-            return {...u, ...newObjProps}
-        }
-        return u;
-    })
-}
 
 const initialState = {
     desks: [
@@ -30,12 +20,14 @@ const initialState = {
             text: 'This is task',
             EditOn: false,
             desk_id: 1,
+            number_on_desk: 1,
         },
         {
             id: 2,
             text: 'This is task2',
             EditOn: false,
             desk_id: 2,
+            number_on_desk: 1,
         }
     ],
 }
@@ -49,7 +41,8 @@ const reducer = (state = initialState, action) => {
                     id: state.tasks[state.tasks.length - 1].id + 1,
                     text: "",
                     EditOn: true,
-                    desk_id: action.desk_id
+                    desk_id: action.desk_id,
+                    number_on_desk: state.tasks.filter(task => task.desk_id === action.desk_id).length + 1
                 }],
             }
         case ADD_DESK:
@@ -61,20 +54,14 @@ const reducer = (state = initialState, action) => {
                 }],
             }
         case EDIT_TASK:
-            if (action.text === '') action.text = state.tasks.find(task => task.id === action.id).text
             return {
                 ...state,
-                tasks: UpdateObjectInArray(state.tasks, action.id, "id", {text: action.text, EditOn: action.EditOn}),
-            }
-        case SET_EDIT_ON:
-            return {
-                ...state,
-                tasks: UpdateObjectInArray(state.tasks, action.id, "id", {EditOn: action.EditOn}),
-            }
-        case SET_TEXT:
-            return {
-                ...state,
-                tasks: UpdateObjectInArray(state.tasks, action.id, "id", {text: action.text}),
+                tasks:  state.tasks.map(u => {
+                            if (u["id"] === action.id) {
+                                return {...u, ...action.data}
+                            }
+                            return u;
+                        })
             }
         case DELETE_TASK:
             return {
@@ -99,22 +86,25 @@ export const deleteTask = (id) => ({
     id: id
 })
 
-export const setText = (id, text) => ({
-    type: SET_TEXT,
-    id: id,
-    text: text,
-})
-export const setEditOn = (id, EditOn) => ({
-    type: SET_EDIT_ON,
-    id: id,
-    EditOn: EditOn,
-})
-export const editTask = (id, text = '', EditOn = false) => ({
+const editTask = (id, data) => ({
     type: EDIT_TASK,
     id: id,
-    text: text,
-    EditOn: EditOn,
+    data: data
 })
+
+export const setText = (id, text) => {
+    return editTask(id, {text: text})
+}
+export const setEditOn = (id, EditOn) => {
+    return editTask(id, {EditOn: EditOn})
+}
+export const setDeskId = (id, desk_id) => {
+    return editTask(id, {desk_id: desk_id})
+}
+export const setNumberOnDesk = (id, number_on_desk) => {
+    return editTask(id, {number_on_desk: number_on_desk})
+}
+
 
 
 export default reducer
