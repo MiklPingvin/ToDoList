@@ -20,26 +20,10 @@ export const App = (props) => {
         </div>
         <div className={style.desks}>
             {props.state.desks.map(desk =>
-                <Desk name={desk.name} key={desk.id_desk} id_desk={desk.id_desk} tasks={props.state.tasks}
-                      addTask={props.addTask} deleteTask={props.deleteTask}
-                      setEditOn={props.setEditOn} setText={props.setText}/>
+                <Desk name={desk.name} key={desk.id_desk} id_desk={desk.id_desk} tasks={props.state.tasks} currentTaskId={props.state.currentTaskId}
+                      addTask={props.addTask} deleteTask={props.deleteTask} setCurrentTaskId={props.setCurrentTaskId}
+                      setEditOn={props.setEditOn} setText={props.setText} setNumberOnDesk = {props.setNumberOnDesk} setDeskId={props.setDeskId}/>
             )}
         </div>
-
-
-        {/*<div>
-      {props.state.tasks
-        .sort((a, b) => a.id - b.id)
-        .map(task =>
-          <Task
-            key={task.id}
-            task={task}
-            deleteTask={props.deleteTask}
-            setText={props.setText}
-            setEditOn={props.setEditOn}/>)}
-    </div>
-    <input type='image' src={plus} alt="" className={style.button} onClick={() => props.addTask()}
-        disabled={props.state.tasks.some(task=> task.EditOn)}
-    />*/}
     </div>)
 }
