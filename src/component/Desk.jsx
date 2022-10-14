@@ -16,19 +16,20 @@ export const Desk = ({
                          setCurrentTask,
                          currentTask
                      }) => {
+    const desk_array = tasks.filter(task => task.desk_id === id_desk)
+
     return (
         <div className={style.desk}>
             <div>{name}</div>
             <div className={style.desk_content}>
                 <div>
-                    {tasks
-                        .filter(task => task.desk_id === id_desk)
+                    {desk_array
                         /////.sort((a, b) => a.number_on_desk - b.number_on_desk)
                         .map(task =>
                             <DivDragAndDrop
                                 task={task}
                                 setNumberOnDesk={setNumberOnDesk} setDeskId={setDeskId}
-                                currentTask={currentTask} setCurrentTask={setCurrentTask}
+                                currentTask={currentTask} setCurrentTask={setCurrentTask} desk_array={desk_array}
                             >
                                 <Task
                                     key={task.id}

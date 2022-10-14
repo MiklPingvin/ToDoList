@@ -24,7 +24,15 @@ export const DivDragAndDrop = (props) => {
 
     function dropHandler(event, task) {
         event.preventDefault()
-        props.setDeskId(props.currentTaskId, task.id_desk)
+        if (props.currentTask.desk_id === task.desk_id) {
+            const currentIndex = props.desk_array.indexOf(props.currentTask)
+            const dropIndex = props.desk_array.indexOf(task)
+            props.desk_array.splice(currentIndex, 1)
+            props.desk_array.splice(dropIndex + 1, 0, props.currentTask)
+            debugger
+
+        }
+        props.setDeskId(props.currentTask.id, task.desk_id)
     }
 
     return <div draggable={true}

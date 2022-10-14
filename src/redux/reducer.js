@@ -73,7 +73,7 @@ const reducer = (state = initialState, action) => {
         case SET_CURRENT_TASK:
             return {
                 ...state,
-                currentTaskId: action.id
+                currentTask: action.task
             }
         default:
             return {...state}
@@ -92,9 +92,9 @@ export const deleteTask = (id) => ({
     type: DELETE_TASK,
     id: id
 })
-export const setCurrentTask = (id) => ({
+export const setCurrentTask = (task) => ({
     type: SET_CURRENT_TASK,
-    id: id
+    task: task
 })
 
 const editTask = (id, data) => ({
