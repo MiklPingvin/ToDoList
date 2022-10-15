@@ -1,6 +1,6 @@
 import style from "../App.module.css";
 import plus from "../img/plus.png";
-import {Desk} from "../component/Desk";
+import {DeskMain} from "../component/Desk";
 import {useState} from "react";
 
 export const App = (props) => {
@@ -20,11 +20,7 @@ export const App = (props) => {
         </div>
         <div className={style.desks}>
             {props.state.desks.map(desk =>
-                <Desk name={desk.name} key={desk.id_desk} id_desk={desk.id_desk} tasks={props.state.tasks}
-                      currentTask={props.state.currentTask}
-                      addTask={props.addTask} deleteTask={props.deleteTask} setCurrentTask={props.setCurrentTask}
-                      setEditOn={props.setEditOn} setText={props.setText} setNumberOnDesk={props.setNumberOnDesk}
-                      setDeskId={props.setDeskId}/>
+                <DeskMain name={desk.name} key={desk.id_desk} id_desk={desk.id_desk} />
             )}
         </div>
     </div>)

@@ -36,6 +36,11 @@
 
 .button_group {
     display: flex;
+    z-index: 1;
+}
+
+.task_group{
+
 }
 
 
@@ -48,13 +53,14 @@
     justify-content: space-between;
     align-items: center;
     cursor: grab;
-    z-index: 1;
+    z-index: 2;
 }
 
 .text {
     width: 60%;
     overflow: hidden;
     font-size: 40px;
+    z-index: 1;
 }
 
 .desks {
