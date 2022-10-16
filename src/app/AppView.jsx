@@ -12,7 +12,7 @@ export const App = (props) => {
     <div className={style.input_group}>
       ToDoList
       <div>
-        <input type="text" placeholder='Enter task' className={style.input} onChange={event => ChangeText(event)} value={props.state.newTaskText}/>
+        <input type="text" placeholder='Enter your task' className={style.input} onChange={event => ChangeText(event)} value={props.state.newTaskText}/>
       </div>
       <input type='image' src={plus} alt="" className={style.button} onClick={() => props.addTask()}/>
     </div>
