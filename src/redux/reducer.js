@@ -2,7 +2,7 @@ const ADD_TASK = 'ADD_TASK'
 const ADD_DESK = 'ADD_DESK'
 const EDIT_TASK = 'EDIT_TASK'
 const DELETE_TASK = 'DELETE_TASK'
-const SET_CURRENT_TASK_ID = 'SET_CURRENT_TASK_ID'
+const SET_CURRENT_TASK = 'SET_CURRENT_TASK'
 
 
 const initialState = {
@@ -31,7 +31,7 @@ const initialState = {
             number_on_desk: 1,
         }
     ],
-    currentTaskId: null
+    currentTask: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -70,10 +70,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tasks: [...state.tasks.filter(task => task.id !== action.id)]
             }
-        case SET_CURRENT_TASK_ID:
+        case SET_CURRENT_TASK:
             return {
                 ...state,
-                currentTaskId: action.id
+                currentTask: action.task
             }
         default:
             return {...state}
@@ -92,9 +92,9 @@ export const deleteTask = (id) => ({
     type: DELETE_TASK,
     id: id
 })
-export const setCurrentTaskId = (id) => ({
-    type: SET_CURRENT_TASK_ID,
-    id: id
+export const setCurrentTask = (task) => ({
+    type: SET_CURRENT_TASK,
+    task: task
 })
 
 const editTask = (id, data) => ({
