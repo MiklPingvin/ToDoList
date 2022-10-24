@@ -4,32 +4,62 @@ import pen from "../img/pen.png";
 import save from "../img/save.webp"
 import out from "../img/out.png"
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {deleteTask, setEditOn, setText} from "../redux/reducer";
 
-export const Task = ({task, deleteTask, setText, setEditOn}) => {
-    const [TaskText, setTaskText] = useState(task.text)
+export const Task = ({task}) => {
+    const [TaskText, setTaskText] = useState(task.text);
+    const dispatch = useDispatch();
+
     return !task.EditOn ?
         <div className={style.task}>
             <div className={style.text}>{task.text}</div>
             <div className={style.button_group}>
-                <input type='image' src={garbage} className={style.button} alt="" onClick={() => deleteTask(task.id)}/>
-                <input type='image' src={pen} className={style.button} alt="" onClick={() => setEditOn(task.id, true)}/>
+                <input
+                  type='image'
+                  src={garbage}
+                  className={style.button}
+                  alt=""
+                  onClick={() => dispatch(deleteTask(task.id))}/>
+                <input
+                  type='image'
+                  src={pen}
+                  className={style.button}
+                  alt=""
+                  onClick={() => dispatch(setEditOn(task.id, true))}/>
             </div>
         </div>
         :
         <div className={style.task}>
-            <input autoFocus type="text" className={style.text} value={TaskText}
-                   onChange={event => setTaskText(event.target.value)}/>
+            <input
+              autoFocus
+              type="text"
+              className={style.text}
+              value={TaskText}
+              onChange={event => setTaskText(event.target.value)}/>
             <div className={style.button_group}>
-                <input type='image' src={out} className={style.button} alt="" onClick={() => {
+                <input
+                  type='image'
+                  src={out}
+                  className={style.button}
+                  alt=""
+                  onClick={() => {
                     if (task.text === '') {
-                        deleteTask(task.id)
+                        dispatch(deleteTask(task.id))
                     }
                     setTaskText(task.text)
-                    setEditOn(task.id, false)
+                    dispatch(setEditOn(task.id, false))
                 }}/>
-                <input type='image' src={save} className={style.button} alt="" onClick={() => {
-                    TaskText.trim() === '' ? deleteTask(task.id) : setText(task.id, TaskText)
-                    setEditOn(task.id, false)
+                <input
+                  type='image'
+                  src={save}
+                  className={style.button}
+                  alt=""
+                  onClick={() => {
+                    TaskText.trim() === ''
+                      ? dispatch(deleteTask(task.id))
+                      : dispatch(setText(task.id, TaskText))
+                    dispatch(setEditOn(task.id, false))
                 }}/>
             </div>
         </div>

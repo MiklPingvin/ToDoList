@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 desks: [...state.desks, {
-                    id_desk: state.desks[state.desks.length - 1].id + 1,
+                    id_desk: state.desks[state.desks.length - 1].id_desk + 1,
                     name: action.name,
                 }],
             }

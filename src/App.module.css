@@ -11,7 +11,13 @@
 .input_group {
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: center;
     padding: 10px;
+}
+
+.input_group a {
+margin-top: 7px;
 }
 
 .input {
@@ -21,8 +27,8 @@
 }
 
 .add_desk_button {
-    width: 50px;
-    height: 50px;
+    width: 73.6px;
+    height: 73.6px;
     border: black 1px solid;
     margin-left: 5px;
 }
@@ -39,9 +45,6 @@
     z-index: 1;
 }
 
-.task_group{
-
-}
 
 
 .task {
