@@ -1,4 +1,8 @@
+import {useDispatch} from "react-redux";
+import {setCurrentTask, setDeskId, setNumberOnDesk} from "../redux/reducer";
+
 export const DivDragAndDrop = (props) => {
+  const dispatch = useDispatch();
 
     function dragOverHandler(event) {
         event.preventDefault()
@@ -9,7 +13,7 @@ export const DivDragAndDrop = (props) => {
     }
 
     function dragStartHandler(event, task) {
-        props.setCurrentTask(task)
+        dispatch(setCurrentTask(task));
     }
 
     function dragEndHandler(event) {
@@ -18,8 +22,8 @@ export const DivDragAndDrop = (props) => {
 
     function dropHandler(event, task) {
         event.preventDefault()
-        props.setNumberOnDesk(props.currentTask.id, task.number_on_desk + 1)
-        props.setDeskId(props.currentTask.id, task.desk_id)
+        dispatch(setNumberOnDesk(props.currentTask.id, task.number_on_desk + 1))
+        dispatch(setDeskId(props.currentTask.id, task.desk_id))
     }
 
     return <div draggable={true}
